@@ -28,7 +28,7 @@
 		<link>
 			<name>driverlib.lib</name>
 			<type>1</type>
-			<location>/home/dvarx/ti/C2000Ware_3_04_00_00/driverlib/f2838x/driverlib/ccs/Debug/driverlib.lib</location>
+			<locationURI>$%7BC2000WARE_DLIB_ROOT%7D/ccs/Debug/driverlib.lib</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
