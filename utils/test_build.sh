@@ -4,7 +4,7 @@
 cd src
 git clone https://github.com/dvarx/mdriver_fw.git
 cd mdriver_fw
-CCS_DIR=/home/ubuntu/ti/ccs
+CCS_DIR=$HOME/ti/ccs
 
 #build CPU1 project
 echo "building CPU1 project..."
