@@ -1,0 +1,55 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+# Each subdirectory must supply rules for building sources it contributes
+%.obj: ../%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=none -me -O0 --opt_for_speed=0 --include_path="$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip" --include_path="$(SRC_DIR)/mdriver_fw/mdriver_cm" --include_path="$(C2000WareDir)/driverlib/f2838x" --include_path="$(C2000WareDir)/driverlib/f2838x/driverlib_cm" --include_path="$(C2000WareDir)_Software/libraries/communications/Ethernet/third_party/lwip/examples/enet_lwip/cm" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/ports/C2000/include" --define=_FLASH --define=ccs -g --diag_warning=225 --gen_func_subsections=on --abi=eabi --ual --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$(shell echo $<)"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+f2838xif.obj: $(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/ports/C2000/netif/f2838xif.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=none -me -O0 --opt_for_speed=0 --include_path="$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip" --include_path="$(SRC_DIR)/mdriver_fw/mdriver_cm" --include_path="$(C2000WareDir)/driverlib/f2838x" --include_path="$(C2000WareDir)/driverlib/f2838x/driverlib_cm" --include_path="$(C2000WareDir)_Software/libraries/communications/Ethernet/third_party/lwip/examples/enet_lwip/cm" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/ports/C2000/include" --define=_FLASH --define=ccs -g --diag_warning=225 --gen_func_subsections=on --abi=eabi --ual --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$(shell echo $<)"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+fs.obj: $(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http/fs.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=none -me -O0 --opt_for_speed=0 --include_path="$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip" --include_path="$(SRC_DIR)/mdriver_fw/mdriver_cm" --include_path="$(C2000WareDir)/driverlib/f2838x" --include_path="$(C2000WareDir)/driverlib/f2838x/driverlib_cm" --include_path="$(C2000WareDir)_Software/libraries/communications/Ethernet/third_party/lwip/examples/enet_lwip/cm" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/ports/C2000/include" --define=_FLASH --define=ccs -g --diag_warning=225 --gen_func_subsections=on --abi=eabi --ual --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$(shell echo $<)"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+httpd.obj: $(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http/httpd.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=none -me -O0 --opt_for_speed=0 --include_path="$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip" --include_path="$(SRC_DIR)/mdriver_fw/mdriver_cm" --include_path="$(C2000WareDir)/driverlib/f2838x" --include_path="$(C2000WareDir)/driverlib/f2838x/driverlib_cm" --include_path="$(C2000WareDir)_Software/libraries/communications/Ethernet/third_party/lwip/examples/enet_lwip/cm" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/ports/C2000/include" --define=_FLASH --define=ccs -g --diag_warning=225 --gen_func_subsections=on --abi=eabi --ual --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$(shell echo $<)"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+lwiplib.obj: $(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/utils/lwiplib.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=none -me -O0 --opt_for_speed=0 --include_path="$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip" --include_path="$(SRC_DIR)/mdriver_fw/mdriver_cm" --include_path="$(C2000WareDir)/driverlib/f2838x" --include_path="$(C2000WareDir)/driverlib/f2838x/driverlib_cm" --include_path="$(C2000WareDir)_Software/libraries/communications/Ethernet/third_party/lwip/examples/enet_lwip/cm" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/ports/C2000/include" --define=_FLASH --define=ccs -g --diag_warning=225 --gen_func_subsections=on --abi=eabi --ual --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$(shell echo $<)"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+pinout.obj: $(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/board_drivers/pinout.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=none -me -O0 --opt_for_speed=0 --include_path="$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip" --include_path="$(SRC_DIR)/mdriver_fw/mdriver_cm" --include_path="$(C2000WareDir)/driverlib/f2838x" --include_path="$(C2000WareDir)/driverlib/f2838x/driverlib_cm" --include_path="$(C2000WareDir)_Software/libraries/communications/Ethernet/third_party/lwip/examples/enet_lwip/cm" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/ports/C2000/include" --define=_FLASH --define=ccs -g --diag_warning=225 --gen_func_subsections=on --abi=eabi --ual --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$(shell echo $<)"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+ustdlib.obj: $(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/utils/ustdlib.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/bin/armcl" -mv7M4 --code_state=16 --float_support=none -me -O0 --opt_for_speed=0 --include_path="$(CCS_DIR)/tools/compiler/ti-cgt-arm_20.2.7.LTS/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps/http" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip" --include_path="$(SRC_DIR)/mdriver_fw/mdriver_cm" --include_path="$(C2000WareDir)/driverlib/f2838x" --include_path="$(C2000WareDir)/driverlib/f2838x/driverlib_cm" --include_path="$(C2000WareDir)_Software/libraries/communications/Ethernet/third_party/lwip/examples/enet_lwip/cm" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/include" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/src/apps" --include_path="$(C2000WareDir)/libraries/communications/Ethernet/third_party/lwip/lwip-2.1.2/ports/C2000/include" --define=_FLASH --define=ccs -g --diag_warning=225 --gen_func_subsections=on --abi=eabi --ual --preproc_with_compile --preproc_dependency="$(basename $(<F)).d_raw" $(GEN_OPTS__FLAG) "$(shell echo $<)"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+

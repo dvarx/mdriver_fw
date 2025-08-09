@@ -6,7 +6,7 @@ WORKDIR /home/ubuntu/
 
 #install CCS 12.8.1 dependencies
 RUN apt update
-RUN apt-get install curl libc6-i386 libusb-0.1-4 git sudo -y
+RUN apt-get install curl libc6-i386 libusb-0.1-4 git nano sudo -y
 #RUN curl --output libtinfo5_6.3-2ubuntu0.1_amd64.deb http://de.archive.ubuntu.com/ubuntu/pool/universe/n/ncurses/libtinfo5_6.3-2ubuntu0.1_amd64.deb
 ADD ./libtinfo5_6.3-2ubuntu0.1_amd64.deb ./libtinfo5_6.3-2ubuntu0.1_amd64.deb
 RUN dpkg -i libtinfo5_6.3-2ubuntu0.1_amd64.deb

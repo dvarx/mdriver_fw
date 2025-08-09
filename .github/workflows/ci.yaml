@@ -1,0 +1,24 @@
+name: Ubuntu 24 CI CCS
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        #stores github workspace in $GITHUB_WORKSPACE
+
+      - name: Run build test within docker container
+        env:
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+        run:  |
+              echo "building branch ${BRANCH_NAME}"
+              docker pull dvarx/mdriver_fw
+              docker run -e BRANCH=$BRANCH_NAME dvarx/mdriver_fw

@@ -4,14 +4,18 @@
 cd src
 git clone https://github.com/dvarx/mdriver_fw.git
 cd mdriver_fw
-CCS_DIR=$HOME/ti/ccs
 
-#build CPU1 project
-echo "building CPU1 project..."
-$CCS_DIR/eclipse/eclipse -noSplash -data /home/ubuntu/ccs_ws -application com.ti.ccstudio.apps.projectImport -ccs.location /home/ubuntu/src/mdriver_fw/mdriver_cpu1
-$CCS_DIR/eclipse/eclipse -noSplash -data /home/ubuntu/ccs_ws -application com.ti.ccstudio.apps.projectBuild -ccs.autoOpen -ccs.projects mdriver_cpu1 -ccs.configuration CPU1_FLASH
+CCS_DIR=/home/ubuntu/ti/ccs
+C2000WareDir=/home/ubuntu/ti/C2000Ware_3_04_00_00
+SRC_DIR=/home/ubuntu/src
+export CCS_DIR
+export SRC_DIR
+export C2000WareDir
 
-#build CM project
-# echo "building CM project..."
-$CCS_DIR/eclipse/eclipse -noSplash -data /home/ubuntu/ccs_ws -application com.ti.ccstudio.apps.projectImport -ccs.location /home/ubuntu/src/mdriver_fw/mdriver_cm
-$CCS_DIR/eclipse/eclipse -noSplash -data /home/ubuntu/ccs_ws -application com.ti.ccstudio.apps.projectBuild -ccs.autoOpen -ccs.projects mdriver_cm -ccs.configuration Flash
+#build the CPU1 code
+cd $HOME/src/mdriver_fw/mdriver_cpu1/cpu1_flash
+$CCS_DIR/utils/bin/gmake -k -j 14 all -O
+
+#build the CM code
+cd $HOME/src/mdriver_fw/mdriver_cm/cm_flash
+$CCS_DIR/utils/bin/gmake -k all
