@@ -13,9 +13,9 @@ export SRC_DIR
 export C2000WareDir
 
 #build the CPU1 code
-cd $HOME/src/mdriver_fw/mdriver_cpu1/cpu1_flash
+cd $HOME/src/mdriver_fw/mdriver_cpu1/build_dir
 $CCS_DIR/utils/bin/gmake -k -j 14 all -O
 
 #build the CM code
-cd $HOME/src/mdriver_fw/mdriver_cm/cm_flash
+cd $HOME/src/mdriver_fw/mdriver_cm/build_dir
 $CCS_DIR/utils/bin/gmake -k all
