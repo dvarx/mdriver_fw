@@ -17,8 +17,9 @@ jobs:
 
       - name: Run build test within docker container
         env:
-          BRANCH_NAME: ${{ github.head_ref || github.ref_name }} 
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+          REPO_NAME: ${{ github.repository }}
         run:  |
               echo "building branch ${BRANCH_NAME}"
               docker pull dvarx/mdriver_fw
-              docker run -e BRANCH=$BRANCH_NAME dvarx/mdriver_fw
+              docker run -e BRANCH_NAME=$BRANCH_NAME -e REPO_NAME=$REPO_NAME dvarx/mdriver_fw

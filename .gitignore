@@ -12,5 +12,5 @@ mdriver_cpu1/CPU1_RAM
 *.d_raw*
 #ignore everything in utils except some files
 utils
-!utils/Dockerfile
-!utils/test_build.sh
+!Dockerfile
+!test_build.sh
