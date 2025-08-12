@@ -2,7 +2,7 @@
 
 #clone the source code
 cd src
-git clone https://github.com/$REPO_NAME -b $BRANCH_NAME
+git clone https://github.com/$REPO_NAME.git -b $BRANCH_NAME
 cd mdriver_fw
 
 CCS_DIR=/home/ubuntu/ti/ccs
