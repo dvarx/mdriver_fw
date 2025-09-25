@@ -22,7 +22,7 @@
  */
 
 //sensitivity of the current sensor in [V/A] (see table above)
-#define I_SENSITIVITY 0.050
+#define I_SENSITIVITY 0.100
 /*
  * define the USE_CALIBRATED_CURRENT_SENSORS below to allow for calibrated current measurements
  * the calibration parameters of the current sensor calibration can be added in `hardware_defs.c`

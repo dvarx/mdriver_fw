@@ -11,36 +11,6 @@
 #include "stdint.h"
 #include <stdbool.h>
 
-const unsigned int timebasemultipliers[]={14,12,10,10,10,10};
-
-//sets up the pinmux and config for a buck stage
-void setup_pin_config_buck(const struct buck_configuration* config){
-    //----- Buck
-    //Buck Enable
-    GPIO_setDirectionMode(config->enable_gpio, GPIO_DIR_MODE_OUT);   //output
-    GPIO_setPadConfig(config->enable_gpio,GPIO_PIN_TYPE_STD);        //push pull output
-    //a call to GPIO_setPinConfig(..) here is not necessary since default pin config is as GPIO
-    //Buck State
-    GPIO_setDirectionMode(config->state_gpio,GPIO_DIR_MODE_IN);     //input
-    GPIO_setPadConfig(config->state_gpio,GPIO_PIN_TYPE_STD);        //floating input
-    //a call to GPIO_setPinConfig(..) here is not necessary since default pin config is as GPIO
-    //Bridge H
-    GPIO_setDirectionMode(config->bridge_h_pin,GPIO_DIR_MODE_OUT);     //output
-    GPIO_setPinConfig(config->bridge_h_pinconfig);
-    //Bridge L
-    GPIO_setDirectionMode(config->bridge_l_pin,GPIO_DIR_MODE_OUT);     //output
-    GPIO_setPinConfig(config->bridge_l_pinconfig);
-    //PWM Setup
-    initEPWMWithoutDB(config->epwmbase,true);
-    setupEPWMActiveHighComplementary(config->epwmbase);
-    //clock prescaling results in a PWM clock of around 50kHz
-    EPWM_setClockPrescaler(config->epwmbase,
-                           EPWM_CLOCK_DIVIDER_2,
-                           EPWM_HSCLOCK_DIVIDER_1);
-    //PWM Setup to ~ 50kHz 50% duty
-    set_duty_buck(config,0.5);
-}
-
 //sets up the pinmux and epwm module config for a bridge stage. duty=50% , freq~48kHz
 void setup_pinmux_config_bridge(const struct bridge_configuration* config, uint8_t channelno){
     //----- Bridge U
@@ -65,37 +35,24 @@ void setup_pinmux_config_bridge(const struct bridge_configuration* config, uint8
     //PWM Setup to ~ 50kHz 50% duty
     initEPWMWithoutDB(config->epwmbase,false);
     setupEPWMActiveHighComplementary(config->epwmbase);
-    EPWM_setTimeBasePeriod(config->epwmbase, EPWM_TIMER_TBPRD_BRIDGE*timebasemultipliers[channelno]);
-    EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_A, EPWM_TIMER_TBPRD_BRIDGE*timebasemultipliers[channelno]/2);
+    EPWM_setTimeBasePeriod(config->epwmbase, EPWM_TIMER_TBPRD_BRIDGE);
+    EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_A, EPWM_TIMER_TBPRD_BRIDGE/2);
     //clock prescaling results in a PWM clock of around 50kHz
     EPWM_setClockPrescaler(config->epwmbase,
                            EPWM_CLOCK_DIVIDER_1,
-                           EPWM_HSCLOCK_DIVIDER_8);
-}
-
-void set_duty_buck(const struct buck_configuration* config, double duty){
-    uint16_t duty_int=duty*EPWM_TIMER_TBPRD_BUCK;
-    //set the duty based on whether the channel has an inverted duty logic or not
-    if(config->is_inverted){
-        EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_A, EPWM_TIMER_TBPRD_BUCK-duty_int);
-        EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_B, duty_int);
-    }
-    else{
-        EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_A, duty_int);
-        EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_B, EPWM_TIMER_TBPRD_BUCK-duty_int);
-    }
+                           EPWM_HSCLOCK_DIVIDER_1);
 }
 
 void set_duty_bridge(const struct bridge_configuration* config, double duty, const uint8_t channelno){
-    uint16_t duty_int=duty*EPWM_TIMER_TBPRD_BRIDGE*timebasemultipliers[channelno];
+    uint16_t duty_int=duty*EPWM_TIMER_TBPRD_BRIDGE;
     //set the duty based on whether the channel has an inverted duty logic or not
     if(config->is_inverted){
-        EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_A, EPWM_TIMER_TBPRD_BRIDGE*timebasemultipliers[channelno]-duty_int);
+        EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_A, EPWM_TIMER_TBPRD_BRIDGE-duty_int);
         EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_B, duty_int);
     }
     else{
         EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_A, duty_int);
-        EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_B, EPWM_TIMER_TBPRD_BRIDGE*timebasemultipliers[channelno]-duty_int);
+        EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_B, EPWM_TIMER_TBPRD_BRIDGE-duty_int);
     }
 }
 
@@ -160,23 +117,6 @@ void initEPWMWithoutDB(uint32_t base,bool is_buck)
                                       EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPA);
 
 
-//    EPWM_setActionQualifierAction(base,
-//                                      EPWM_AQ_OUTPUT_B,
-//                                      EPWM_AQ_OUTPUT_LOW,
-//                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_ZERO);
-//    EPWM_setActionQualifierAction(base,
-//                                      EPWM_AQ_OUTPUT_B,
-//                                      EPWM_AQ_OUTPUT_HIGH,
-//                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_UP_CMPB);
-//    EPWM_setActionQualifierAction(base,
-//                                      EPWM_AQ_OUTPUT_B,
-//                                      EPWM_AQ_OUTPUT_NO_CHANGE,
-//                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_PERIOD);
-//    EPWM_setActionQualifierAction(base,
-//                                      EPWM_AQ_OUTPUT_B,
-//                                      EPWM_AQ_OUTPUT_LOW,
-//                                      EPWM_AQ_OUTPUT_ON_TIMEBASE_DOWN_CMPB);
-
 }
 
 void setupEPWMActiveHighComplementary(uint32_t base)
@@ -191,8 +131,8 @@ void setupEPWMActiveHighComplementary(uint32_t base)
     // Set the RED and FED values
     //
     // TODO : The constant value of 40 here sets the interlock of the buck stage to around 400ns, might need to adjust / optimize this at some point
-    EPWM_setFallingEdgeDelayCount(base, 10);
-    EPWM_setRisingEdgeDelayCount(base, 10);
+    EPWM_setFallingEdgeDelayCount(base, 60);
+    EPWM_setRisingEdgeDelayCount(base, 60);
 
     //
     // Invert only the Falling Edge delayed output (AHC)
@@ -290,44 +230,4 @@ void synchronize_pwm_to_epwm12(struct driver_channel** channels, const unsigned 
     //set phase shift register to zero
     EPWM_setPhaseShift(channels[channel_to_sync]->bridge_config->epwmbase, 0);
     return;
-}
-
-//set pwm frequency of bridge
-void set_freq_bridge(const struct bridge_configuration* config,const uint32_t freq_mhz){
-    /* General Formulas & Relationships (see also OneNote notes)
-     *
-     * Tpwm=1/fpwm
-     * fEPWM=100MH(frequency going into the EPWM modules, can be divided down by clock dividers of EPWM module)
-     *
-     * For symmetrical EPWM (e.g. count up and down)
-     * -----------------
-     * countermax=TimeBasePeriod=Tpwm*fEPWM/(2*CLOCK_DIVIDER_1*CLOCK_DIVIDER_2)
-     *
-     * The maximum period for a set of clock dividers is given as
-     * maxperiod=2*CLOCK_DIVIDER_1*CLOCK_DIVIDER_2*2^16/fepwm
-     *
-     * For non-symmetrical EPWM (e.g. dount up or count down)
-     * -----------------
-     * countermax=TimeBasePeriod=Tpwm*fEPWM/(CLOCK_DIVIDER_1*CLOCK_DIVIDER_2)
-     */
-
-    //the ePWM clock coming in is 100MHz
-    /*
-     * choosing the prescalers like this results in:
-     *False
-     * fpwm_max=250kHz
-     * fpwm_min=7.62HzFalse
-     * TimeBasePeriod(3kHz)=1666
-     * TimeBasePeriod(1kHz)=5000
-     * TimeBasePeriod(100Hz)=50000
-     */
-    EPWM_setClockPrescaler(config->epwmbase, EPWM_CLOCK_DIVIDER_1, EPWM_HSCLOCK_DIVIDER_1);
-
-    unsigned int counterlimit=(((100000000)/(16*2*(freq_mhz/1000))));
-
-    EPWM_setFallingEdgeDelayCount(config->epwmbase, 128);
-    EPWM_setRisingEdgeDelayCount(config->epwmbase, 128);
-    EPWM_setTimeBasePeriod(config->epwmbase, counterlimit);
-    EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_A, counterlimit/2);
-    EPWM_setCounterCompareValue(config->epwmbase, EPWM_COUNTER_COMPARE_B, counterlimit/2);
 }

@@ -18,7 +18,7 @@ const unsigned int TERMINATE_REGULAR_TIMEVAL=(unsigned int)(0.5/deltaT);
 // ---------------------------------
 // FSM flags used to trigger FSM transitions
 // ---------------------------------
-fsm_flag fsm_req_flags_en_buck[NO_CHANNELS]={0};
+fsm_flag fsm_req_flags_enable[NO_CHANNELS]={0};
 fsm_flag fsm_req_flags_run_regular[NO_CHANNELS]={0};
 fsm_flag fsm_req_flags_run_resonant[NO_CHANNELS]={0};
 fsm_flag fsm_req_flags_stop[NO_CHANNELS];
@@ -34,7 +34,7 @@ void run_channel_fsm(struct driver_channel* channel){
     uint8_t n=channel->channel_no;
     switch(channel->channel_state){
     case READY:
-            if(fsm_req_flags_en_buck[channel->channel_no]){
+            if(fsm_req_flags_enable[channel->channel_no]){
                 READY_exit(n);
                 BUCK_ENABLED_enter(n);
                 channel->channel_state=BUCK_ENABLED;
@@ -141,7 +141,7 @@ void run_channel_fsm(struct driver_channel* channel){
     }
 
     //reset the fsm request flags
-    fsm_req_flags_en_buck[n]=false;
+    fsm_req_flags_enable[n]=false;
     fsm_req_flags_run_regular[n]=false;
     fsm_req_flags_run_resonant[n]=false;
     fsm_req_flags_stop[n]=false;

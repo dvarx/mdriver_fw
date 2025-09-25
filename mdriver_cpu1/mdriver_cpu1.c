@@ -246,7 +246,7 @@ __interrupt void IPC_ISR0()
         for(i=0; i<NO_CHANNELS; i++){
             //check the BUCK_EN byte
             if(ipc_mdriver_msg.buck_flg_byte&(1<<i))
-                fsm_req_flags_en_buck[i]=true;
+                fsm_req_flags_enable[i]=true;
             //check the STOP byte
             if(ipc_mdriver_msg.stp_flg_byte&(1<<i))
                 fsm_req_flags_stop[i]=true;
